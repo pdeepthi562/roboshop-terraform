@@ -1,6 +1,5 @@
 #test = "Hello from Prod"
 components = {
-  default = {
     frontend = {
       name          = "frontend"
       instance_type = "t3.small"

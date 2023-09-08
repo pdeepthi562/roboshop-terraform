@@ -1,7 +1,6 @@
 #test = "Hello from Dev"
 
 components = {
-  default = {
     frontend = {
       name          = "frontend"
       instance_type = "t3.micro"
@@ -44,6 +43,6 @@ components = {
     }
   }
 
-  security_groups = [ "sg-038da0861b4c1788f" ]
-  zone_id = "Z06290253V8BVAICG1EGQ"
+  security_groups = ["sg-038da0861b4c1788f"]
+  zone_id         = "Z06290253V8BVAICG1EGQ"
 
