@@ -1,2 +1,2 @@
 output "vpc" {
-  value = local.app_subnets
+  value = data.aws_subnets.subnets
