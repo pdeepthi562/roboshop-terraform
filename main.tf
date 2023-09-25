@@ -100,6 +100,28 @@ module "elasticache" {
   engine_version    = each.value["engine_version"]
 }
 
+module "rabbitmq" {
+
+  source            = "git::https://github.com/pdeepthi562/tf-module-rabbitmq.git"
+  tags              = var.tags
+  env               = var.env
+  for_each          = var.rabbitmq
+  subnet_ids        = local.db_subnets
+  vpc_id            = local.vpc_id
+  sg_ingress_cidr   = local.app_subnets_cidr
+  sg_ingress_cidr  = each.value["sg_ingress_cidr"]
+  instance_type    = each.value["instance_type"]
+
+}
+
+
+
+#variable "sg_ingress_cidr" {}
+#variable "instance_type" {}
+
+
+
+
 
 
 
