@@ -109,8 +109,8 @@ module "rabbitmq" {
   subnet_ids        = local.db_subnets
   vpc_id            = local.vpc_id
   sg_ingress_cidr   = local.app_subnets_cidr
-  sg_ingress_cidr  = each.value["sg_ingress_cidr"]
-  instance_type    = each.value["instance_type"]
+  instance_type  = each.value["instance_type"]
+  ssh_ingress_cidr    = each.value["ssh_ingress_cidr"]
 
 }
 
