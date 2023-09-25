@@ -105,6 +105,7 @@ module "rabbitmq" {
   source            = "git::https://github.com/pdeepthi562/tf-module-rabbitmq.git"
   tags              = var.tags
   env               = var.env
+  zone_id           = var.zone_id
   for_each          = var.rabbitmq
   subnet_ids        = local.db_subnets
   vpc_id            = local.vpc_id
