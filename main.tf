@@ -137,6 +137,7 @@ module "app" {
   subnet_ids        = local.app_subnets
 
  alb_name           = lookup(lookup(lookup(module.alb, "private", null), "alb" ,null) ,"dns_name", null)
+  Listener           = lookup(lookup(lookup(module.alb, "private", null), "listener" ,null) ,"arn", null)
 }
 
 
