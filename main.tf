@@ -40,85 +40,95 @@ module "alb" {
 
 }
 
-module "docdb" {
+#module "docdb" {
+#
+#  source     = "git::https://github.com/pdeepthi562/tf-module-docdb.git"
+#  tags = var.tags
+#  env = var.env
+#  for_each   = var.docdb
+#  subnet_ids = local.db_subnets
+#  backup_retention_period = each.value["backup_retention_period"]
+#  preferred_backup_window = each.value["preferred_backup_window"]
+#  skip_final_snapshot     = each.value["skip_final_snapshot"]
+#  vpc_id = local.vpc_id
+#  sg_ingress_cidr = local.app_subnets_cidr
+#  engine_version = each.value["engine_version"]
+#  engine_family = each.value["engine_family"]
+#  instance_count = each.value["instance_count"]
+#  instance_class = each.value["instance_class"]
+#
+#
+#}
+#
+#module "rds" {
+#
+#  source     = "git::https://github.com/pdeepthi562/tf-module-rds.git"
+#  tags = var.tags
+#  env = var.env
+#  for_each   = var.rds
+#  subnet_ids = local.db_subnets
+#  vpc_id = local.vpc_id
+#  sg_ingress_cidr = local.app_subnets_cidr
+#  rds_type = each.value["rds_type"]
+#  db_port = each.value["db_port"]
+#  engine_family = each.value["engine_family"]
+#  engine = each.value["engine"]
+#  engine_version = each.value["engine_version"]
+#  backup_retention_period = each.value["backup_retention_period"]
+#  preferred_backup_window = each.value["preferred_backup_window"]
+#  skip_final_snapshot     = each.value["skip_final_snapshot"]
+#  instance_count = each.value["instance_count"]
+#  instance_class = each.value["instance_class"]
+#
+#}
+#
+#module "elasticache" {
+#
+#  source            = "git::https://github.com/pdeepthi562/tf-module-elasticache.git"
+#  tags              = var.tags
+#  env               = var.env
+#  for_each          = var.elasticache
+#  subnet_ids        = local.db_subnets
+#  vpc_id            = local.vpc_id
+#  sg_ingress_cidr   = local.app_subnets_cidr
+#  elesticache_type  = each.value["elesticache_type"]
+#  family            = each.value["family"]
+#  port              = each.value["port"]
+#  engine            = each.value["engine"]
+#  node_type         = each.value["node_type"]
+#  num_cache_nodes   = each.value["num_cache_nodes"]
+#  engine_version    = each.value["engine_version"]
+#}
+#
+#module "rabbitmq" {
+#
+#  source            = "git::https://github.com/pdeepthi562/tf-module-rabbitmq.git"
+#  tags              = var.tags
+#  env               = var.env
+#  zone_id           = var.zone_id
+#  for_each          = var.rabbitmq
+#  subnet_ids        = local.db_subnets
+#  vpc_id            = local.vpc_id
+#  sg_ingress_cidr   = local.app_subnets_cidr
+#  instance_type     = each.value["instance_type"]
+#  ssh_ingress_cidr  = var.ssh_ingress_cidr
+#
+#}
 
-  source     = "git::https://github.com/pdeepthi562/tf-module-docdb.git"
-  tags = var.tags
-  env = var.env
-  for_each   = var.docdb
-  subnet_ids = local.db_subnets
-  backup_retention_period = each.value["backup_retention_period"]
-  preferred_backup_window = each.value["preferred_backup_window"]
-  skip_final_snapshot     = each.value["skip_final_snapshot"]
-  vpc_id = local.vpc_id
-  sg_ingress_cidr = local.app_subnets_cidr
-  engine_version = each.value["engine_version"]
-  engine_family = each.value["engine_family"]
-  instance_count = each.value["instance_count"]
-  instance_class = each.value["instance_class"]
 
-
-}
-
-module "rds" {
-
-  source     = "git::https://github.com/pdeepthi562/tf-module-rds.git"
-  tags = var.tags
-  env = var.env
-  for_each   = var.rds
-  subnet_ids = local.db_subnets
-  vpc_id = local.vpc_id
-  sg_ingress_cidr = local.app_subnets_cidr
-  rds_type = each.value["rds_type"]
-  db_port = each.value["db_port"]
-  engine_family = each.value["engine_family"]
-  engine = each.value["engine"]
-  engine_version = each.value["engine_version"]
-  backup_retention_period = each.value["backup_retention_period"]
-  preferred_backup_window = each.value["preferred_backup_window"]
-  skip_final_snapshot     = each.value["skip_final_snapshot"]
-  instance_count = each.value["instance_count"]
-  instance_class = each.value["instance_class"]
-
-}
-
-module "elasticache" {
-
-  source            = "git::https://github.com/pdeepthi562/tf-module-elasticache.git"
-  tags              = var.tags
-  env               = var.env
-  for_each          = var.elasticache
-  subnet_ids        = local.db_subnets
-  vpc_id            = local.vpc_id
-  sg_ingress_cidr   = local.app_subnets_cidr
-  elesticache_type  = each.value["elesticache_type"]
-  family            = each.value["family"]
-  port              = each.value["port"]
-  engine            = each.value["engine"]
-  node_type         = each.value["node_type"]
-  num_cache_nodes   = each.value["num_cache_nodes"]
-  engine_version    = each.value["engine_version"]
-}
-
-module "rabbitmq" {
-
-  source            = "git::https://github.com/pdeepthi562/tf-module-rabbitmq.git"
+module "app" {
+  source = "git::https://github.com/pdeepthi562/tf-module-app.git"
   tags              = var.tags
   env               = var.env
   zone_id           = var.zone_id
-  for_each          = var.rabbitmq
-  subnet_ids        = local.db_subnets
-  vpc_id            = local.vpc_id
+  for_each          = var.apps
+  component         = each.name
+  port              =each.value["port"]
   sg_ingress_cidr   = local.app_subnets_cidr
-  instance_type  = each.value["instance_type"]
-  ssh_ingress_cidr    = each.value["ssh_ingress_cidr"]
-
+  ssh_ingress_cidr    = var.ssh_ingress_cidr
 }
 
 
-
-#variable "sg_ingress_cidr" {}
-#variable "instance_type" {}
 
 
 
