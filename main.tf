@@ -129,6 +129,7 @@ module "app" {
 
   sg_ingress_cidr   = local.app_subnets_cidr
   ssh_ingress_cidr    = var.ssh_ingress_cidr
+  subnet_ids        = local.app_subnets
 }
 
 
