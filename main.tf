@@ -136,7 +136,7 @@ module "app" {
   ssh_ingress_cidr    = var.ssh_ingress_cidr
   subnet_ids        = local.app_subnets
 
- alb_name           = lookup(look(lookup(module.alb, "private", null), "alb" ,null) ,"dns_name", null)
+ alb_name           = lookup(lookup(lookup(module.alb, "private", null), "alb" ,null) ,"dns_name", null)
 }
 
 
