@@ -124,7 +124,7 @@ module "app" {
   vpc_id            = local.vpc_id
 
   for_each          = var.apps
-  component         = each.name
+  component         = each.key
   port              =each.value["port"]
 
   sg_ingress_cidr   = local.app_subnets_cidr
