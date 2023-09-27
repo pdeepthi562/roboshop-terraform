@@ -108,6 +108,7 @@ apps = {
     max_size          = 3
     min_size          = 1
     lb_priority       = 1
+    lb_type           = public
 
   }
   catalogue = {
@@ -117,6 +118,7 @@ apps = {
     max_size          = 3
     min_size          = 1
     lb_priority       = 2
+    lb_type           = private
 
   }
   user = {
@@ -126,6 +128,7 @@ apps = {
     max_size          = 3
     min_size          = 1
     lb_priority       = 3
+    lb_type           = private
 
   }
   cart = {
@@ -135,6 +138,7 @@ apps = {
     max_size          = 3
     min_size          = 1
     lb_priority       = 4
+    lb_type           = private
 
   }
   payment = {
@@ -144,6 +148,7 @@ apps = {
     max_size          = 3
     min_size          = 1
     lb_priority       = 5
+    lb_type           = private
 
   }
   shipping = {
@@ -153,6 +158,7 @@ apps = {
     max_size          = 3
     min_size          = 1
     lb_priority       = 6
+    lb_type           = private
 
   }
 }
