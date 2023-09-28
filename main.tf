@@ -121,7 +121,9 @@ module "app" {
   tags              = var.tags
   env               = var.env
   zone_id           = var.zone_id
-  vpc_id            = local.vpc_id
+  ssh_ingress_cidr   = var.ssh_ingress_cidr
+  default_vpc_id    = var.default_vpc_id
+
 
   for_each          = var.apps
   component         = each.key
@@ -134,7 +136,7 @@ module "app" {
 
 
   sg_ingress_cidr   = local.app_subnets_cidr
-  ssh_ingress_cidr    = var.ssh_ingress_cidr
+  vpc_id            = local.vpc_id
   subnet_ids        = local.app_subnets
 
   private_alb_name     = lookup(lookup(lookup(module.alb, "private", null), "alb" ,null) ,"dns_name", null)
